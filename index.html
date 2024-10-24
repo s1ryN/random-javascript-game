@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Klikačka</title>
+  <style>
+    #kruh{
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      background-color: red;
+      position: absolute;
+    }
+  </style>
+</head>
+<body>
+ <div id="kruh" onclick="pohyb()" > </div>
+</body>
+<script>
+let kruh = document.getElementById("kruh");
+let width = window.innerWidth;
+let height = window.innerHeight;
+let vyska = 200;
+let sirka = 200;
+let skore = 0;
+
+function pohyb () {
+  kruh.style.top = Math.floor(Math.random() * (height - vyska)) + "px";
+  kruh.style.left = Math.floor(Math.random() * (width - sirka)) + "px";
+  vyska -= 20;
+  sirka -= 20;
+  kruh.style.width = sirka + "px";
+  kruh.style.height = vyska + "px";
+  skore ++;
+}
+function endgame (){
+  window.alert("Konec hry, vase skore je:"+ skore);
+  vyska = 200;
+  sirka = 200;
+  kruh.style.width = 200 + "px";
+  kruh.style.height = 200 + "px";
+  skore = 0;
+  kruh.style.top = Math.floor(Math.random() * (height - 200)) + "px";
+  kruh.style.left = Math.floor(Math.random() * (width - 200)) + "px";
+}
+
+let interval = setInterval(endgame,6000);
+
+</script>
+</html>

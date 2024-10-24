@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Klikačka</title>
+    <style>
+    #circle {
+        width: 50px;
+        height: 50px;
+        background-color: red;
+        border-radius: 50%;
+        position: absolute;
+        cursor: pointer;
+    }
+    
+    body {
+        position: relative;
+        width: 100vw;
+        height: 100vh;
+        margin: 0;
+        background-color: #f0f0f0;
+    }
+    </style>
+</head>
+<body>
+    <div id="circle"></div>
+</body>
+<script>
+    let interval = 60;
+    let score = 0;
+    let timeLeft = 60;
+    let circlesize = 50;
+
+    document.getElementById("circle");
+
+    function randomposition(){
+        const body = document.querySelector('body');
+        const cWidth = body.clientWidth;
+        const cHeight = body.clientHeight;
+
+        const randomX = Math.floor(Math.random() * (cWidth - circlesize));
+        const randomY = Math.floor(Math.random() * (cHeight - circlesize));
+
+        circle.style.left = `${randomX}px`;
+        circle.style.top = `${randomY}px`;
+    }
+
+    function onClick(){
+        score++;
+        circlesize--;
+        circle.style.width = `${circlesize}px`;
+        circle.style.height = `${circlesize}px`;
+
+        randomposition();
+    }
+
+    function startTimer() {
+        interval = setInterval(() => {
+            timeLeft--;
+
+            if (timeLeft === 0) {
+                clearInterval(interval);
+                endGame();
+            }
+        }, 1000);
+    }
+    
+    function endGame() {
+        circle.removeEventListener('click', onClick);
+        alert(`Hra skončila, tvoje skóre je: ${score}`);
+    }
+
+    randomposition();
+    startTimer();
+    circle.addEventListener('click', onClick);
+</script>
+</html>
